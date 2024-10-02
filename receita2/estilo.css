@@ -1,0 +1,27 @@
+p.verso {
+    color: blue;
+}
+
+p.mote {
+    color: red;
+}
+
+a.custom_link:visited {
+    color: purple; 
+}
+
+a.custom_link:hover {
+    color: green;
+}
+
+.arrounded_img {
+    border-radius: 50%;
+}
+
+.poeta img {
+    border-radius: 50%;
+}
+
+#custom_table th { 
+    background-color: rgb(240, 0, 0);
+}
