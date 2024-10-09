@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div><a id="botaoCarregar" href="#">Carregando cervejas...</a></div>
+    <div id="meu amor"></div>
+</body>
+
+<script>
+    let cervejas = ["Guiness", "Desperados", "Becks"]
+    let assentos = ["Poltrona", "Sofá", "Cadeira"]
+
+    // selecionar o array passado
+    const carregarDiv = () => carregar(cervejas);
+    
+    let carregar = (cervs) => {
+        const div = document.getElementById("meu amor")
+        const cervejasHtml = cervs.map(item => `<h1>${item}</h1>`)
+        div.innerHTML = `${cervejasHtml.join("\n")}`
+    }
+
+    let botao = document.getElementById("botaoCarregar")
+    botao.addEventListener("click", carregarDiv)
+</script>
+</html>
