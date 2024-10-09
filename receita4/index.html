@@ -16,7 +16,7 @@
 
 <script>
     let ascending = false;
-    let cervejas = ["Guiness", "Desperados", "Becks"]
+    let cervejas = ["Guiness", "Desperados", "Becks", "Heineken", "Budweiser", "Corona", "Stella Artois", "IPA da Sierra Nevada", "Krombacher", "Brahma"];
 
     function transformar(item) {
         return `<tr><td class="cerveja">${item}</td></tr>`
@@ -29,15 +29,20 @@
         if (ascending) {
             table.innerHTML = `
             <tr>
-                <th>Cervejas <button onclick="cervejasHtml = cervejas.sort().reverse().map(transformar); ascending = false; carregarDiv();">↑ Nome</button> <button onclick="cervejasHtml = cervejas.sort((a, b) => 0.5 - Math.random()).map(transformar); ascending = false; carregarDiv();">Embaralhar</button></th>
+                <th>Cervejas 
+                    <button onclick="cervejasHtml = cervejas.sort().reverse().map(transformar); ascending = false; carregarDiv();">↑ Nome</button>
+                    <button onclick="cervejasHtml = cervejas.sort((a, b) => 0.5 - Math.random()).map(transformar); ascending = false; carregarDiv();">Embaralhar</button>
+                </th>
             </tr>
-
             ${cervejasHtml.join("\n")}`
             
-        } else{
+        } else {
             table.innerHTML = `
             <tr>
-                <th>Cervejas <button onclick="cervejasHtml = cervejas.sort().map(transformar); ascending = true; carregarDiv();">↓ Nome</button> <button onclick="cervejasHtml = cervejas.sort((a, b) => 0.5 - Math.random()).map(transformar); ascending = false; carregarDiv();">Embaralhar</button></th>
+                <th>Cervejas 
+                    <button onclick="cervejasHtml = cervejas.sort().map(transformar); ascending = true; carregarDiv();">↓ Nome</button> 
+                    <button onclick="cervejasHtml = cervejas.sort((a, b) => 0.5 - Math.random()).map(transformar); ascending = false; carregarDiv();">Embaralhar</button>
+                </th>
             </tr>
             ${cervejasHtml.join("\n")}`
             
