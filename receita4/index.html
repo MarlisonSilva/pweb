@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="meu amor"><button id="botaoCarregar">Carregando cervejas...</button></div>
+    <table id="custom_table">
+        <tr>
+            <th>Cervejas</th>
+        </tr>
+    </table>
+</body>
+
+<script>
+    let ascending = false;
+    let cervejas = ["Guiness", "Desperados", "Becks"]
+
+    function transformar(item) {
+        return `<tr><td class="cerveja">${item}</td></tr>`
+    }
+
+    function carregarDiv() {
+        let table = document.getElementById("custom_table");
+        //let cervejasHtml = [`<h1>${cervejas[0]}</h1>`,`<h1>${cervejas[1]}</h1>`, `<h1>${cervejas[2]}</h1>`] 
+        let cervejasHtml = cervejas.map(transformar)
+        if (ascending) {
+            table.innerHTML = `
+            <tr>
+                <th>Cervejas <button onclick="cervejasHtml = cervejas.sort().reverse().map(transformar); ascending = false; carregarDiv();">↑ Nome</button> <button onclick="cervejasHtml = cervejas.sort((a, b) => 0.5 - Math.random()).map(transformar); ascending = false; carregarDiv();">Embaralhar</button></th>
+            </tr>
+
+            ${cervejasHtml.join("\n")}`
+            
+        } else{
+            table.innerHTML = `
+            <tr>
+                <th>Cervejas <button onclick="cervejasHtml = cervejas.sort().map(transformar); ascending = true; carregarDiv();">↓ Nome</button> <button onclick="cervejasHtml = cervejas.sort((a, b) => 0.5 - Math.random()).map(transformar); ascending = false; carregarDiv();">Embaralhar</button></th>
+            </tr>
+            ${cervejasHtml.join("\n")}`
+            
+        } 
+    }
+    let botao = document.getElementById("botaoCarregar")
+    botao.addEventListener("click", carregarDiv)
+</script>
+</html>
