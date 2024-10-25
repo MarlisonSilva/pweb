@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div><button id="botaoCarregar">Carregando cervejas...</button></div>
+    <table class="custom_table" id="cervejasTable">
+        <tr>
+            <th>SUAS CERVEJAS AQUI!</th>
+        </tr>
+    </table>
+
+    <div><button id="botaoCarregarLivros">Carregando livros...</button></div>
+    <table class="custom_table" id="livrosTable">
+        <tr>
+            <th>SEUS LIVROS AQUI!</th>
+        </tr>
+    </table>
+</body>
+
+<script>
+
+    let cervejas = [
+        {
+            name: "Guiness",
+            alcohol: "10%",
+            style: "Stout",
+            ibu: "45"
+        },
+        {
+            name: "Desperados",
+            alcohol: "6%",
+            style: "Lager",
+            ibu: "15"
+        },
+        {
+            name: "Becks",
+            alcohol: "5%",
+            style: "Pilsner",
+            ibu: "24"
+        },
+        {
+            name: "Heineken",
+            alcohol: "5%",
+            style: "Lager",
+            ibu: "19"
+        },
+        {
+            name: "IPA Lagunitas",
+            alcohol: "6.2%",
+            style: "IPA",
+            ibu: "52"
+        },
+        {
+            name: "Corona",
+            alcohol: "4.6%",
+            style: "Lager",
+            ibu: "18"
+        },
+        {
+            name: "Sierra Nevada Pale Ale",
+            alcohol: "5.6%",
+            style: "Pale Ale",
+            ibu: "38"
+        },
+        {
+            name: "Budweiser",
+            alcohol: "5%",
+            style: "Lager",
+            ibu: "12"
+        },
+        {
+            name: "Duvel",
+            alcohol: "8.5%",
+            style: "Belgian Strong Ale",
+            ibu: "32"
+        },
+        {
+            name: "Weihenstephaner Hefeweissbier",
+            alcohol: "5.4%",
+            style: "Hefeweizen",
+            ibu: "14"
+        }
+    ];
+
+    let livros = [
+        {
+            title: "1984",
+            author: "George Orwell",
+            genre: "Dystopian",
+            pages: "328"
+        },
+        {
+            title: "To Kill a Mockingbird",
+            author: "Harper Lee",
+            genre: "Classic",
+            pages: "281"
+        },
+        {
+            title: "The Great Gatsby",
+            author: "F. Scott Fitzgerald",
+            genre: "Classic",
+            pages: "180"
+        },
+        {
+            title: "The Catcher in the Rye",
+            author: "J.D. Salinger",
+            genre: "Coming-of-Age",
+            pages: "277"
+        },
+        {
+            title: "The Hobbit",
+            author: "J.R.R. Tolkien",
+            genre: "Fantasy",
+            pages: "310"
+        },
+        {
+            title: "Sapiens: A Brief History of Humankind",
+            author: "Yuval Noah Harari",
+            genre: "Non-Fiction",
+            pages: "443"
+        },
+        {
+            title: "Pride and Prejudice",
+            author: "Jane Austen",
+            genre: "Romance",
+            pages: "279"
+        },
+        {
+            title: "The Alchemist",
+            author: "Paulo Coelho",
+            genre: "Philosophical",
+            pages: "208"
+        },
+        {
+            title: "Brave New World",
+            author: "Aldous Huxley",
+            genre: "Dystopian",
+            pages: "268"
+        },
+        {
+            title: "Harry Potter and the Sorcerer's Stone",
+            author: "J.K. Rowling",
+            genre: "Fantasy",
+            pages: "309"
+        }
+    ];
+
+
+    transformar = (item) => `<tr>
+            ${Object.values(item).map(i => `<td class="item">${i}</td>`).join('')}
+        </tr>`;
+
+    const carregarTab = (id = "cervejasTable", items = cervejas, titles = ["Nome", "Álcool", "Estilo", "Amargor"]) => {
+        const tab = document.getElementById(id)
+        const itensHtml = items.map(transformar)
+        const titlesHtml = titles.map(t => `<th>${t}</th>`)
+        tab.innerHTML = `
+        ${titlesHtml.join("")}
+        ${itensHtml.join("\n")}`
+    }
+
+
+    let botao = document.getElementById("botaoCarregar")
+    botao.addEventListener("click", () => carregarTab())
+
+    let botaoLivros = document.getElementById("botaoCarregarLivros")
+    botaoLivros.addEventListener("click", () => carregarTab("livrosTable", livros, ["Título", "Autor", "Gênero", "Páginas"]))
+
+</script>
+
+</html>
