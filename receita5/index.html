@@ -2,19 +2,29 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div><a id="botaoCarregar" href="#">Carregando cervejas...</a></div>
     <div id="meu amor"></div>
+
+    <div><a id="botaoCarregarTabela" href="#">Carregando assentos...</a></div>
+    <table id="custom_table">
+        <tr>
+            <th>Itens</th>
+        </tr>
+    </table>
 </body>
 
 <script>
+    let ascending = false;
     let cervejas = ["Guiness", "Desperados", "Becks"]
-    let assentos = ["Poltrona", "Sofá", "Cadeira"]
-
+    let items = ["Poltrona", "Sofá", "Cadeira", "Banco", "Puff", "Divã", "Banqueta", "Chaise", "Cadeira de balanço", "Futon", "Pufe", "Cadeira de escritório", "Cadeira de praia", "Cadeira de área", "Cadeira de jantar"];
+    
     // selecionar o array passado
     const carregarDiv = () => carregar(cervejas);
+    const carregarTabela = () => carregarTab(items);
     
     let carregar = (cervs) => {
         const div = document.getElementById("meu amor")
@@ -22,7 +32,38 @@
         div.innerHTML = `${cervejasHtml.join("\n")}`
     }
 
+    transformar = (item) => `<tr><td class="item">${item}</td></tr>`;
+    
+    let carregarTab = (items) => {
+        const table = document.getElementById("custom_table")
+        const itemHtml = items.map(transformar)
+        if (ascending) {
+            table.innerHTML = `
+            <tr>
+                <th>Itens 
+                    <a class="custom_button" onclick="itemHtml = items.sort().reverse().map(transformar); ascending = false; carregarTabela();">↑ Nome</a>
+                    <a class="custom_button" onclick="itemHtml = items.sort((a, b) => 0.5 - Math.random()).map(transformar); ascending = false; carregarTabela();">Embaralhar</a>
+                </th>
+            </tr>
+            ${itemHtml.join("\n")}`
+            
+        } else {
+            table.innerHTML = `
+            <tr>
+                <th>Itens 
+                    <a class="custom_button" onclick="itemHtml = items.sort().map(transformar); ascending = true; carregarTabela();">↓ Nome</a> 
+                    <a class="custom_button" id="shuffle" onclick="itemHtml = items.sort((a, b) => 0.5 - Math.random()).map(transformar); ascending = false; carregarTabela();">Embaralhar</a>
+                </th>
+            </tr>
+            ${itemHtml.join("\n")}`
+            
+        } 
+    }
+
     let botao = document.getElementById("botaoCarregar")
     botao.addEventListener("click", carregarDiv)
+
+    let botaoCarregarTabela = document.getElementById("botaoCarregarTabela")
+    botaoCarregarTabela.addEventListener("click", carregarTabela)
 </script>
 </html>
