@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ReactZero</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+    <script src="libs/react.js"></script>
+    <script src="libs/react-dom.js"></script>
+
+    <script>
+        ReactDOM.render(
+            React.createElement('div', null,
+                React.createElement(
+                    'h1',
+                    { id: 'my-heading' },
+                    React.createElement(
+                        'span',
+                        null,
+                        'React ',
+                        React.createElement('em', null, 'é muito'),
+                    ),
+                    ' massa!'
+                ),
+                React.createElement(
+                    'table',
+                    { className: 'custom_table' },
+                    React.createElement('thead',
+                        null,
+                        React.createElement('tr',
+                            null,
+                            React.createElement('th', null, 'Nome'),
+                            React.createElement('th', null, 'Sobrenome'),
+                            React.createElement('th', null, 'Telefone'),
+                        ),
+                    ),
+                    React.createElement('tbody',
+                        null,
+                        React.createElement('tr',
+                            null,
+                            React.createElement('td', null, 'Marlison'),
+                            React.createElement('td', null, 'Silva'),
+                            React.createElement('td', null, '84 99999-9999'),
+                        ),
+                        React.createElement('tr',
+                            null,
+                            React.createElement('td', null, 'Gaspar'),
+                            React.createElement('td', null, 'Peres'),
+                            React.createElement('td', null, '84 98888-8888'),
+                        ),
+                    ),
+                ),
+            ),
+
+            document.getElementById('app')
+
+        );
+    </script>
+</body>
+
+</html>
