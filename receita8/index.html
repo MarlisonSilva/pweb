@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div><button id="botaoCerveja">Carregando cervejas...</button></div>
+    <table class="custom_table" id="cervejasTable"></table>
+    <br />
+    <div><button id="botaoUsers">Carregando usuários...</button></div>
+    <table class="custom_table" id="usersTable"></table>
+    <br />
+    <div><button id="botaoCarregar">Carregar genérico...</button></div>
+    <table class="custom_table" id="table"></table>
+</body>
+
+<script>
+
+    let cervejas = []
+
+    const carregarDiv = cs => {
+        const div = document.getElementById("cervejasTable")
+        const itensHtml = cs.map(({ name, alcohol, yeast }) => `<tr><td>${name}</td><td>${alcohol}</td><td>${yeast}</td></tr>`)
+        div.innerHTML = `<tr><th>Nome</th><th>Álcool</th><th>Levedura</th></tr>${itensHtml.join("\n")}`
+    }
+
+    function carregarCervejas() {
+        fetch("https://random-data-api.com/api/v2/beers?size=3").then(
+            res => res.json()
+        ).then(
+            cervejas => carregarDiv(cervejas)
+        ).catch(
+            err => document.getElementById("cervejasTable").innerHTML = `ERRO! ${err}`
+        )
+        document.getElementById("cervejasTable").innerHTML = `ESPERANDO API CERVEJAS...`
+    }
+
+    const carregarTableUsers = ctu => {
+        const div = document.getElementById("usersTable")
+        const itensHtml = ctu.map(({ first_name, email, phone_number }) => `<tr><td>${first_name}</td><td>${email}</td><td>${phone_number}</td></tr>`)
+        div.innerHTML = `<tr><th>Nome</th><th>E-mail</th><th>Telefone</th></tr>${itensHtml.join("\n")}`
+    }
+
+    function carregarUsers() {
+        fetch("https://random-data-api.com/api/v2/users?size=3").then(
+            res => res.json()
+        ).then(
+            users => carregarTableUsers(users)
+        ).catch(
+            err => document.getElementById("usersTable").innerHTML = `ERRO! ${err}`
+        )
+        document.getElementById("usersTable").innerHTML = `ESPERANDO API USERS...`
+    }
+
+    let botaoCerveja = document.getElementById("botaoCerveja")
+    botaoCerveja.addEventListener("click", () => carregarCervejas())
+
+    let botaoUsers = document.getElementById("botaoUsers")
+    botaoUsers.addEventListener("click", () => carregarUsers())
+
+</script>
+<script src="loadJSON.js"></script>
+
+</html>
