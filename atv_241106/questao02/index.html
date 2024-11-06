@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <p>Quantidade de itens:</p>
+    <div><input type="number" id="quantidade" value="0" /> <button id="botaoCarregar">Carregar Tabela</button></div>
+    <br />
+    <table class="custom_table" id="table"></table>
+</body>
+
+<script>
+    let loadingItens = false;
+    const carregarTable = (ct, labels, indices) => {
+        const tb = document.getElementById("table")
+        const itensHtml = ct.map((item) => `<tr>${indices.map((i) => "<td>" + item[i] + "</td>").join("\n")}</tr>`)
+        tb.innerHTML = `<tr>${labels.map((lbl) => "<th>" + lbl + "</th>").join("\n")}</tr>${itensHtml.join("\n")}`
+    }
+
+    function carregar(labels, indices, linkapi) {
+        console.log(linkapi);
+        fetch(linkapi).then(
+            res => res.json()
+        ).then(
+            json => carregarTable(json, labels, indices)
+
+        ).catch(
+            err => document.getElementById("table").innerHTML = `ERRO! ${err}`
+        )
+        document.getElementById("table").innerHTML = `ESPERANDO API...`
+    }
+
+    const addTable = (ct, labels, indices) => {
+        const tb = document.getElementById("table")
+        const itensHtml = ct.map((item) => `<tr>${indices.map((i) => "<td>" + item[i] + "</td>").join("\n")}</tr>`)
+        tb.innerHTML += `</tr>${itensHtml.join("\n")}`
+    }
+
+    function carregarMais(labels, indices, linkapi) {
+        console.log(linkapi);
+        fetch(linkapi).then(
+            res => res.json()
+        ).then(
+            json => addTable(json, labels, indices)
+        ).catch(
+            err => console.log(err)
+        ).finally(
+            () => loadingItens = false
+        )
+        loadingItens = true
+    }
+
+    let botao = document.getElementById("botaoCarregar")
+    let quantidade = document.getElementById("quantidade");
+    botao.addEventListener("click", () => carregar(
+        ["Nome", "E-mail", "Telefone"],
+        ["first_name", "email", "phone_number"],
+        `https://random-data-api.com/api/v2/users?size=${quantidade.value > 1 ? quantidade.value : 2}`
+
+    ))
+
+    window.addEventListener('scroll', function () {
+        let alturaRestante = document.documentElement.scrollHeight - window.innerHeight - window.scrollY
+        console.log(loadingItens)
+        if (!loadingItens && alturaRestante <= 200) {
+            console.log('Posição do scroll vertical:', document.documentElement.scrollHeight - window.innerHeight - window.scrollY);
+            loadingItens = true
+            carregarMais(
+                ["Nome", "E-mail", "Telefone"],
+                ["first_name", "email", "phone_number"],
+                `https://random-data-api.com/api/v2/users?size=40`
+            )
+        }
+    });
+</script>
+
+</html>
