@@ -66,7 +66,7 @@
             const [mostrarTabela, setMostrarTabela] = React.useState(false);
 
             return (
-                <div id="app">
+                <div>
                     <Cabecalho />
                     <button onClick={() => setMostrarTabela(true)}>Mostrar Tabela</button>
                     {mostrarTabela && <TabelaBebidas />}
