@@ -11,7 +11,7 @@ export default async function Movies({ searchParams }) {
         return (
             <div>
                 <div>
-                    {data.Search.map((m) => <div key={m.imdbID}><center><img src={m.Poster} /> <span>{m.Title}</span> <br /> <span>{m.Year}</span></center> <br /> </div>)}
+                    {data.Search.map((m) => <div key={m.imdbID}><center><img src={m.Poster} /> <span>{m.Title}</span> <br /> <span>{m.Type}</span> <br /> <span>{m.Year}</span></center> <br /> </div>)}
 
                 </div>
             </div>
