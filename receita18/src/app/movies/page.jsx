@@ -20,7 +20,7 @@ export default async function Movies({ searchParams }) {
     } catch (error) {
         return (
             <div>
-                <p>{(error as Error).message}</p>
+                <p>{error.message}</p>
             </div>
         );
     }

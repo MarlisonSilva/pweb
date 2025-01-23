@@ -12,7 +12,7 @@ export default function Home() {
         const titleSearchKey = formData.get("titleSearchKey")
         setTitleSearchKey(titleSearchKey)
         setIsSubmitting(true)
-        const httpRes = await fetch(`http://www.omdbapi.com/?apikey=f1cbc41e&s=${titleSearchKey}`)
+        const httpRes = await fetch(`http://localhost:3000/api/searchMovies?titleSearchKey=${titleSearchKey}`)
         const jsonRes = await httpRes.json()
         setResultMovies(jsonRes.Search || [])
         setIsSubmitting(false)
